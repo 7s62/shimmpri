@@ -1,0 +1,56 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: balue
+  namespace: staging
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: staging-api.shimmpri.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: balue
+                port:
+                  number: 3333
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: balue-shimmer
+  namespace: staging
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: staging-shimmer-api.shimmpri.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: balue-shimmer
+                port:
+                  number: 3333
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: balue
+  namespace: production
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: api.shimmpri.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: balue
+                port:
+                  number: 3333
